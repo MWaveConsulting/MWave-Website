@@ -182,6 +182,45 @@ function WhoAreWe() {
   );
 }
 
+function OurProduct() {
+  return (
+    <main>
+      <section className="product-section">
+        <h2 className="product-title">Our Product</h2>
+        <div className="product-content">
+          <div className="product-image-container fade-in-up">
+            <img
+              src={rosemaryLogo}
+              alt="Rosemery CRM Logo"
+              className="product-image"
+            />
+          </div>
+          <div className="product-description fade-in-up">
+            <h3>Rosemery CRM</h3>
+            <p>
+              Rosemery CRM is a modern, intuitive booking management system
+              designed specifically for wedding venues and event spaces. It
+              streamlines your entire booking process, centralizes client
+              communications, and gives you a clear overview of your
+              business—all in one place.
+              <br />
+              <br />
+              <b>Key Features:</b>
+            </p>
+            <ul>
+              <li>Easy calendar and booking management</li>
+              <li>Centralized client and event details</li>
+              <li>Automated reminders and follow-ups</li>
+              <li>Document and payment tracking</li>
+              <li>Customizable to your venue's needs</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
+
 function App() {
   const aboutRef = useRef(null);
   const servicesRef = useRef(null);
@@ -241,6 +280,9 @@ function App() {
             <Link to="/who-are-we" className="nav-link">
               Who We Are
             </Link>
+            <Link to="/our-product" className="nav-link">
+              Our Product
+            </Link>
             <button onClick={() => scrollToSection(servicesRef)}>
               Services
             </button>
@@ -269,6 +311,7 @@ function App() {
           }
         />
         <Route path="/who-are-we" element={<WhoAreWe />} />
+        <Route path="/our-product" element={<OurProduct />} />
       </Routes>
       <footer className="footer minimal-footer">
         &copy; {new Date().getFullYear()} MWave Consulting. All rights reserved.
