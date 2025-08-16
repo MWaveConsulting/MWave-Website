@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
@@ -10,26 +10,6 @@ export default function Home() {
   const heroRef = useRef(null);
   const servicesRef = useRef(null);
   const integrationsRef = useRef(null);
-
-  useEffect(() => {
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in");
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
 
   const services = [
     {
@@ -77,51 +57,51 @@ export default function Home() {
   const integrations = [
     {
       name: "Salesforce",
-      logo: "https://logos-world.net/wp-content/uploads/2020/10/Salesforce-Logo.png",
+      logo: "https://www.vectorlogo.zone/logos/salesforce/salesforce-ar21.svg",
     },
     {
       name: "Oracle",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Oracle-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png",
     },
     {
       name: "Google Calendar",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Google-Calendar-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/1200px-Google_Calendar_icon_%282020%29.svg.png",
     },
     {
       name: "Google Sheets",
-      logo: "https://logos-world.net/wp-content/uploads/2021/11/Google-Sheets-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Google_Sheets_2020_Logo.svg",
     },
     {
       name: "Notion",
-      logo: "https://logos-world.net/wp-content/uploads/2021/03/Notion-Logo.png",
-    },
-    {
-      name: "HubSpot",
-      logo: "https://logos-world.net/wp-content/uploads/2021/02/HubSpot-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Notion_app_logo.png/1200px-Notion_app_logo.png",
     },
     {
       name: "Microsoft 365",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Microsoft-365-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png",
     },
     {
       name: "Slack",
-      logo: "https://logos-world.net/wp-content/uploads/2020/10/Slack-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png",
     },
     {
       name: "Zoom",
-      logo: "https://logos-world.net/wp-content/uploads/2020/12/Zoom-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/2880px-Zoom_Logo_2022.svg.png",
     },
     {
       name: "Stripe",
-      logo: "https://logos-world.net/wp-content/uploads/2021/03/Stripe-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png",
+    },
+    {
+      name: "Hubspot",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/HubSpot_Logo.svg/2880px-HubSpot_Logo.svg.png",
     },
     {
       name: "Zapier",
-      logo: "https://logos-world.net/wp-content/uploads/2021/10/Zapier-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Zapier_logo.svg",
     },
     {
-      name: "Monday.com",
-      logo: "https://logos-world.net/wp-content/uploads/2021/11/Monday-Logo.png",
+      name: "Open AI",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/OpenAI_logo_2025_%28wordmark%29.svg/2880px-OpenAI_logo_2025_%28wordmark%29.svg.png",
     },
   ];
 
@@ -145,13 +125,13 @@ export default function Home() {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
-          <div className="text-center animate-on-scroll">
+          <div className="text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
                 <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
                   Intelligent AI Agents
                 </span>
@@ -170,7 +150,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl sm:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed"
+              className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed px-4"
             >
               We build advanced chatbots and phone agents that handle bookings,
               integrate with your favorite tools, and provide 24/7 customer
@@ -181,27 +161,26 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex flex-col sm:flex-row justify-center gap-4"
+              className="flex flex-col sm:flex-row justify-center gap-4 px-4"
             >
               <Button
                 asChild
                 size="lg"
-                className="text-lg px-8 py-6 shadow-lg hover:shadow-xl smooth-transition"
+                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl smooth-transition text-white"
                 style={{ backgroundColor: "var(--primary-dark)" }}
               >
                 <Link
                   to={createPageUrl("Contact")}
-                  className="flex items-center"
+                  className="flex items-center text-white"
                 >
-                  Schedule Consultation
-                  <ArrowRight className="ml-2 w-5 h-5" />
+                  Ride the MWave <span className="ml-2">🏄</span>
                 </Link>
               </Button>
               <Button
                 asChild
                 size="lg"
                 variant="outline"
-                className="text-lg px-8 py-6 border-2 smooth-transition"
+                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 border-2 smooth-transition"
                 style={{
                   borderColor: "var(--primary-dark)",
                   color: "var(--primary-dark)",
@@ -217,13 +196,10 @@ export default function Home() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-20 grid grid-cols-2 lg:grid-cols-4 gap-8"
+            className="mt-16 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8"
           >
             {stats.map((stat, index) => (
-              <div
-                key={index}
-                className="text-center animate-on-scroll fade-in-delay-1"
-              >
+              <div key={index} className="text-center">
                 <div
                   className="text-3xl lg:text-4xl font-bold mb-2"
                   style={{ color: "var(--primary-dark)" }}
@@ -240,7 +216,7 @@ export default function Home() {
       {/* Services Overview */}
       <section ref={servicesRef} className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -253,15 +229,13 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {services.map((service, index) => (
               <Card
                 key={index}
-                className={`animate-on-scroll fade-in-delay-${
-                  index + 1
-                } hover-lift smooth-transition border-0 shadow-lg`}
+                className="hover-lift smooth-transition border-0 shadow-lg"
               >
-                <CardContent className="p-8 text-center">
+                <CardContent className="p-6 sm:p-8 text-center">
                   <div
                     className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-md"
                     style={{ backgroundColor: "var(--primary-dark)" }}
@@ -302,7 +276,7 @@ export default function Home() {
         style={{ backgroundColor: "var(--bg-light)" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -315,11 +289,11 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6 lg:gap-8 items-center">
             {integrations.map((integration, index) => (
               <div
                 key={index}
-                className="animate-on-scroll hover-lift smooth-transition bg-white rounded-xl p-6 shadow-md group"
+                className="hover-lift smooth-transition bg-white rounded-xl p-4 sm:p-6 shadow-md group"
               >
                 <img
                   src={integration.logo}
@@ -330,7 +304,7 @@ export default function Home() {
             ))}
           </div>
 
-          <div className="text-center mt-12 animate-on-scroll">
+          <div className="text-center mt-12">
             <Button
               asChild
               size="lg"
@@ -351,7 +325,7 @@ export default function Home() {
 
       {/* CTA Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
             className="text-3xl sm:text-4xl font-bold mb-6"
             style={{ color: "var(--primary-dark)" }}
@@ -362,23 +336,26 @@ export default function Home() {
             Join leading companies who trust MWave Consulting to deliver
             intelligent AI solutions that drive growth and efficiency.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 px-4">
             <Button
               asChild
               size="lg"
-              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl smooth-transition"
+              className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl smooth-transition text-white"
               style={{ backgroundColor: "var(--primary-dark)" }}
             >
-              <Link to={createPageUrl("Contact")} className="flex items-center">
+              <Link
+                to={createPageUrl("Contact")}
+                className="flex items-center text-white"
+              >
                 Get Started Today
-                <ArrowRight className="ml-2 w-5 h-5" />
+                <ArrowRight className="ml-2 w-5 h-5 text-white" />
               </Link>
             </Button>
             <Button
               asChild
               size="lg"
               variant="outline"
-              className="text-lg px-8 py-6 border-2 smooth-transition"
+              className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 border-2 smooth-transition"
               style={{
                 borderColor: "var(--primary-dark)",
                 color: "var(--primary-dark)",

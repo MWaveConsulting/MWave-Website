@@ -1,29 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Award, Target, Lightbulb } from "lucide-react";
+import pwcLogo from "../../dist/assets/Pwc-B1m78K8I.png";
+import ibmLogo from "../../dist/assets/IBM.png";
 
 export default function WhoWeAre() {
-  useEffect(() => {
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in");
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   const values = [
     {
       icon: Target,
@@ -62,7 +44,7 @@ export default function WhoWeAre() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-on-scroll">
+          <div className="text-center">
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8"
               style={{ color: "var(--primary-dark)" }}
@@ -81,7 +63,7 @@ export default function WhoWeAre() {
       {/* Company Story */}
       <section className="py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="animate-on-scroll text-center mb-16">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-8"
               style={{ color: "var(--primary-dark)" }}
@@ -115,7 +97,7 @@ export default function WhoWeAre() {
       {/* Team Cards */}
       <section className="py-20" style={{ backgroundColor: "var(--bg-light)" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -130,14 +112,14 @@ export default function WhoWeAre() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {/* Co-Founder 1 */}
-            <Card className="animate-on-scroll fade-in-delay-1 hover-lift smooth-transition border-0 shadow-xl bg-white">
+            <Card className="hover-lift smooth-transition border-0 shadow-xl bg-white">
               <CardContent className="p-8">
                 <div className="text-center mb-6">
                   <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
                     <Users className="w-16 h-16 text-blue-600" />
                   </div>
                   <Badge
-                    className="mb-4 px-3 py-1"
+                    className="mb-4 px-3 py-1 text-white"
                     style={{ backgroundColor: "var(--primary-dark)" }}
                   >
                     Co-Founder
@@ -148,26 +130,26 @@ export default function WhoWeAre() {
                   className="text-2xl font-bold text-center mb-2"
                   style={{ color: "var(--primary-dark)" }}
                 >
-                  Tech Consultant Co-Founder
+                  Tech Consultant
                 </h3>
 
                 <div className="text-center mb-6">
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center mb-8 mt-8">
                     <img
-                      src="https://logos-world.net/wp-content/uploads/2020/09/PwC-Logo.png"
+                      src={pwcLogo}
                       alt="PwC"
                       className="h-8 object-contain"
                     />
                   </div>
-                  <p className="text-lg font-semibold text-gray-700 mb-2">
-                    Currently at PwC
-                  </p>
+
+                  {/*
                   <p className="text-gray-600 leading-relaxed">
-                    Specializing in technology consulting and digital
+                    Specialising in technology consulting and digital
                     transformation for leading organizations. Expert in
                     enterprise AI implementation, process automation, and
                     strategic technology planning.
                   </p>
+                  */}
                 </div>
 
                 <div className="space-y-3">
@@ -188,14 +170,14 @@ export default function WhoWeAre() {
             </Card>
 
             {/* Co-Founder 2 */}
-            <Card className="animate-on-scroll fade-in-delay-2 hover-lift smooth-transition border-0 shadow-xl bg-white">
+            <Card className="hover-lift smooth-transition border-0 shadow-xl bg-white">
               <CardContent className="p-8">
                 <div className="text-center mb-6">
                   <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-purple-100 to-purple-200 flex items-center justify-center">
                     <Lightbulb className="w-16 h-16 text-purple-600" />
                   </div>
                   <Badge
-                    className="mb-4 px-3 py-1"
+                    className="mb-4 px-3 py-1 text-white"
                     style={{ backgroundColor: "var(--primary-dark)" }}
                   >
                     Co-Founder
@@ -206,25 +188,25 @@ export default function WhoWeAre() {
                   className="text-2xl font-bold text-center mb-2"
                   style={{ color: "var(--primary-dark)" }}
                 >
-                  Software Developer Co-Founder
+                  Software Developer
                 </h3>
 
                 <div className="text-center mb-6">
-                  <div className="flex items-center justify-center mb-4">
+                  <div className="flex items-center justify-center mb-8 mt-8">
                     <img
-                      src="https://logos-world.net/wp-content/uploads/2020/09/IBM-Logo.png"
+                      src={ibmLogo}
                       alt="IBM"
                       className="h-8 object-contain"
                     />
                   </div>
-                  <p className="text-lg font-semibold text-gray-700 mb-2">
-                    Currently at IBM
-                  </p>
+
+                  {/*
                   <p className="text-gray-600 leading-relaxed">
                     Building robust software solutions and driving innovation in
                     the tech industry. Expert in AI/ML development, system
                     architecture, and scalable software engineering.
                   </p>
+                  */}
                 </div>
 
                 <div className="space-y-3">
@@ -250,7 +232,7 @@ export default function WhoWeAre() {
       {/* Our Values */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -267,9 +249,7 @@ export default function WhoWeAre() {
             {values.map((value, index) => (
               <Card
                 key={index}
-                className={`animate-on-scroll fade-in-delay-${
-                  index + 1
-                } hover-lift smooth-transition border-0 shadow-lg`}
+                className="hover-lift smooth-transition border-0 shadow-lg"
               >
                 <CardContent className="p-6 text-center">
                   <div
@@ -296,7 +276,7 @@ export default function WhoWeAre() {
 
       {/* Why Choose Us */}
       <section className="py-20" style={{ backgroundColor: "var(--bg-light)" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
             className="text-3xl sm:text-4xl font-bold mb-8"
             style={{ color: "var(--primary-dark)" }}

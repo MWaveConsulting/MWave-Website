@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, Calendar, MapPin, CheckCircle, Send } from "lucide-react";
-import { SendEmail } from "@/integrations/Core";
+import { SendEmail, sendEmailViaMailto } from "@/integrations/Core";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -25,6 +25,7 @@ export default function Contact() {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [emailError, setEmailError] = useState("");
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
@@ -36,39 +37,66 @@ export default function Contact() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setEmailError("");
 
     const emailBody = `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6;">
-        <h2 style="color: #1f2428;">New Inquiry from MWave Website</h2>
-        <p>You have received a new contact form submission with the following details:</p>
-        <table style="width: 100%; border-collapse: collapse;">
-          <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px; font-weight: bold; width: 120px;">Name:</td>
-            <td style="padding: 8px;">${formData.name}</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px; font-weight: bold;">Email:</td>
-            <td style="padding: 8px;">${formData.email}</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px; font-weight: bold;">Phone:</td>
-            <td style="padding: 8px;">${formData.phone || "Not provided"}</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px; font-weight: bold;">Company:</td>
-            <td style="padding: 8px;">${formData.company || "Not provided"}</td>
-          </tr>
-          <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 8px; font-weight: bold;">Service Interest:</td>
-            <td style="padding: 8px;">${
-              formData.service || "Not specified"
-            }</td>
-          </tr>
-        </table>
-        <h3 style="color: #1f2428; margin-top: 20px;">Message:</h3>
-        <p style="background-color: #f8fafc; padding: 12px; border-radius: 4px;">${
-          formData.message
-        }</p>
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 24px;">
+        <div style="background: linear-gradient(135deg, #1f2428 0%, #37404a 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; margin: -24px -24px 24px -24px;">
+          <h1 style="margin: 0; font-size: 24px; font-weight: bold;">🌊 New MWave Website Inquiry</h1>
+          <p style="margin: 8px 0 0 0; opacity: 0.9;">You have received a new contact form submission</p>
+        </div>
+        
+        <div style="background-color: #f8fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
+          <h2 style="color: #1f2428; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">📋 Contact Information</h2>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 12px 8px; font-weight: 600; width: 140px; color: #37404a;">👤 Name:</td>
+              <td style="padding: 12px 8px; color: #1f2428;">${
+                formData.name
+              }</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">📧 Email:</td>
+              <td style="padding: 12px 8px; color: #1f2428;">${
+                formData.email
+              }</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">📞 Phone:</td>
+              <td style="padding: 12px 8px; color: #1f2428;">${
+                formData.phone || "Not provided"
+              }</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">🏢 Company:</td>
+              <td style="padding: 12px 8px; color: #1f2428;">${
+                formData.company || "Not provided"
+              }</td>
+            </tr>
+            <tr style="border-bottom: 1px solid #e5e7eb;">
+              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">🎯 Service Interest:</td>
+              <td style="padding: 12px 8px; color: #1f2428;">${
+                formData.service || "Not specified"
+              }</td>
+            </tr>
+          </table>
+        </div>
+        
+        <div style="background-color: #ffffff; border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px;">
+          <h3 style="color: #1f2428; margin: 0 0 16px 0; font-size: 16px; display: flex; align-items: center;">
+            💬 Message
+          </h3>
+          <div style="background-color: #f8fafc; padding: 16px; border-radius: 6px; border-left: 4px solid #2563eb; font-size: 14px; line-height: 1.6; color: #1f2428;">
+            ${formData.message.replace(/\n/g, "<br>")}
+          </div>
+        </div>
+        
+        <div style="margin-top: 24px; padding: 16px; background-color: #f0f9ff; border-radius: 6px; border-left: 4px solid #2563eb;">
+          <p style="margin: 0; font-size: 12px; color: #1f2428; opacity: 0.8;">
+            📅 Submitted on: ${new Date().toLocaleString()}<br>
+            🌐 Source: MWave Consulting Website Contact Form
+          </p>
+        </div>
       </div>
     `;
 
@@ -76,39 +104,28 @@ export default function Contact() {
       await SendEmail({
         to: "mwave.consulting@protonmail.com",
         from_name: "MWave Website Inquiry",
-        subject: `New Contact Form Submission from ${formData.name}`,
+        subject: `🌊 New Contact Form Submission from ${formData.name}`,
         body: emailBody,
       });
       setIsSubmitted(true);
+    } catch (error) {
+      console.error("Email sending failed:", error);
+      setEmailError(
+        "Failed to send email. Please try again or use the alternative method below."
+      );
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  React.useEffect(() => {
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in");
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
+  const handleMailtoFallback = () => {
+    sendEmailViaMailto(formData);
+  };
 
   if (isSubmitted) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center animate-on-scroll max-w-md">
+        <div className="text-center max-w-md">
           <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-green-100 flex items-center justify-center">
             <CheckCircle className="w-10 h-10 text-green-500" />
           </div>
@@ -159,7 +176,7 @@ export default function Contact() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-on-scroll">
+          <div className="text-center">
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8"
               style={{ color: "var(--primary-dark)" }}
@@ -179,7 +196,7 @@ export default function Contact() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Form */}
-            <div className="animate-on-scroll fade-in-delay-1">
+            <div>
               <Card className="border-0 shadow-xl">
                 <CardHeader className="p-8">
                   <CardTitle
@@ -301,7 +318,7 @@ export default function Contact() {
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full h-12 text-lg shadow-lg hover:shadow-xl smooth-transition"
+                      className="w-full h-12 text-lg shadow-lg hover:shadow-xl smooth-transition text-white"
                       style={{ backgroundColor: "var(--primary-dark)" }}
                       disabled={isSubmitting}
                     >
@@ -311,19 +328,47 @@ export default function Contact() {
                           Sending...
                         </>
                       ) : (
-                        <>
+                        <div className="flex items-center text-white">
                           <Send className="w-5 h-5 mr-2" />
                           Send Message
-                        </>
+                        </div>
                       )}
                     </Button>
                   </form>
+
+                  {/* Error Message */}
+                  {emailError && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
+                      <p className="text-red-700 text-sm">{emailError}</p>
+                    </div>
+                  )}
+
+                  {/* Alternative Email Method */}
+                  <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                    <h4 className="font-semibold text-blue-900 mb-2">
+                      Alternative Contact Method
+                    </h4>
+                    <p className="text-blue-700 text-sm mb-3">
+                      If the form doesn't work, you can also send us an email
+                      directly:
+                    </p>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="sm"
+                      onClick={handleMailtoFallback}
+                      className="text-blue-700 border-blue-300 hover:bg-blue-100"
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Send Email via Mail App
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
 
             {/* Contact Information */}
-            <div className="animate-on-scroll fade-in-delay-2 space-y-8">
+            <div className="space-y-8">
               <Card className="border-0 shadow-lg">
                 <CardContent className="p-8">
                   <h3
@@ -468,7 +513,7 @@ export default function Contact() {
 
       {/* Trust Section */}
       <section className="py-20" style={{ backgroundColor: "var(--bg-light)" }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center animate-on-scroll">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2
             className="text-3xl sm:text-4xl font-bold mb-8"
             style={{ color: "var(--primary-dark)" }}

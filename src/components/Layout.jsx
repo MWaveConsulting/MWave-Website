@@ -12,7 +12,7 @@ export default function Layout({ children, currentPageName }) {
     { name: "Home", path: "Home" },
     { name: "Who We Are", path: "WhoWeAre" },
     { name: "Our Solutions", path: "OurSolutions" },
-    { name: "Contact Us", path: "Contact" }
+    { name: "Contact Us", path: "Contact" },
   ];
 
   const isActivePage = (pagePath) => {
@@ -73,29 +73,49 @@ export default function Layout({ children, currentPageName }) {
           <div className="flex justify-between items-center h-16">
             {/* Left: Logo */}
             <div className="flex-none">
-              <Link to={createPageUrl("Home")} className="flex items-center space-x-3 group">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center smooth-transition group-hover:scale-105" style={{ backgroundColor: 'var(--primary-dark)' }}>
-                  <Bot className="w-6 h-6 text-white" />
+              <Link
+                to={createPageUrl("Home")}
+                className="flex items-center space-x-2 sm:space-x-3 group"
+              >
+                <div
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center smooth-transition group-hover:scale-105"
+                  style={{ backgroundColor: "var(--primary-dark)" }}
+                >
+                  <Bot className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
                 </div>
                 <div className="hidden sm:block">
-                  <div className="font-bold text-xl" style={{ color: 'var(--primary-dark)' }}>MWave</div>
-                  <div className="text-xs font-medium" style={{ color: 'var(--text-gray)' }}>Consulting</div>
+                  <div
+                    className="font-bold text-lg sm:text-xl"
+                    style={{ color: "var(--primary-dark)" }}
+                  >
+                    MWave
+                  </div>
+                  <div
+                    className="text-xs font-medium"
+                    style={{ color: "var(--text-gray)" }}
+                  >
+                    Consulting
+                  </div>
                 </div>
               </Link>
             </div>
 
             {/* Center: Desktop Navigation */}
-            <div className="hidden md:flex flex-1 justify-center items-center space-x-8">
+            <div className="hidden md:flex flex-1 justify-center items-center space-x-6 lg:space-x-8">
               {navigationItems.map((item) => (
                 <Link
                   key={item.name}
                   to={createPageUrl(item.path)}
-                  className={`px-4 py-2 rounded-lg font-medium smooth-transition ${
+                  className={`px-3 lg:px-4 py-2 rounded-lg font-medium smooth-transition text-sm lg:text-base ${
                     isActivePage(item.path)
-                      ? 'text-white shadow-md'
-                      : 'text-gray-600 hover:text-gray-900'
+                      ? "text-white shadow-md"
+                      : "text-gray-600 hover:text-gray-900"
                   }`}
-                  style={isActivePage(item.path) ? { backgroundColor: 'var(--primary-dark)' } : {}}
+                  style={
+                    isActivePage(item.path)
+                      ? { backgroundColor: "var(--primary-dark)" }
+                      : {}
+                  }
                 >
                   {item.name}
                 </Link>
@@ -104,12 +124,12 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Right: CTA & Mobile Menu */}
             <div className="flex-none flex items-center">
-              <Button 
+              <Button
                 asChild
-                className="hidden md:flex shadow-md hover:shadow-lg smooth-transition"
-                style={{ backgroundColor: 'var(--cta-blue)' }}
+                className="hidden md:flex shadow-md hover:shadow-lg smooth-transition text-white"
+                style={{ backgroundColor: "var(--cta-blue)" }}
               >
-                <Link to={createPageUrl("Contact")}>
+                <Link to={createPageUrl("Contact")} className="text-white">
                   Get Started
                 </Link>
               </Button>
@@ -117,7 +137,11 @@ export default function Layout({ children, currentPageName }) {
                 className="md:hidden p-2 rounded-lg smooth-transition hover:bg-gray-100"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                {mobileMenuOpen ? (
+                  <X className="w-6 h-6" />
+                ) : (
+                  <Menu className="w-6 h-6" />
+                )}
               </button>
             </div>
           </div>
@@ -133,21 +157,29 @@ export default function Layout({ children, currentPageName }) {
                   to={createPageUrl(item.path)}
                   className={`block px-4 py-3 rounded-lg font-medium smooth-transition ${
                     isActivePage(item.path)
-                      ? 'text-white shadow-md'
-                      : 'text-gray-600'
+                      ? "text-white shadow-md"
+                      : "text-gray-600"
                   }`}
-                  style={isActivePage(item.path) ? { backgroundColor: 'var(--primary-dark)' } : {}}
+                  style={
+                    isActivePage(item.path)
+                      ? { backgroundColor: "var(--primary-dark)" }
+                      : {}
+                  }
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                 </Link>
               ))}
-              <Button 
+              <Button
                 asChild
-                className="w-full mt-3"
-                style={{ backgroundColor: 'var(--cta-blue)' }}
+                className="w-full mt-3 text-white"
+                style={{ backgroundColor: "var(--cta-blue)" }}
               >
-                <Link to={createPageUrl("Contact")} onClick={() => setMobileMenuOpen(false)}>
+                <Link
+                  to={createPageUrl("Contact")}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-white"
+                >
                   Get Started
                 </Link>
               </Button>
@@ -157,9 +189,7 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* Main Content */}
-      <main className="pt-16">
-        {children}
-      </main>
+      <main className="pt-16">{children}</main>
 
       {/* Footer */}
       <footer className="bg-gray-50 border-t border-gray-200 mt-20">
@@ -167,22 +197,41 @@ export default function Layout({ children, currentPageName }) {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ backgroundColor: 'var(--primary-dark)' }}>
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center"
+                  style={{ backgroundColor: "var(--primary-dark)" }}
+                >
                   <Bot className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <div className="font-bold text-xl" style={{ color: 'var(--primary-dark)' }}>MWave Consulting</div>
-                  <div className="text-sm" style={{ color: 'var(--text-gray)' }}>Intelligent AI Agents for Business</div>
+                  <div
+                    className="font-bold text-xl"
+                    style={{ color: "var(--primary-dark)" }}
+                  >
+                    MWave Consulting
+                  </div>
+                  <div
+                    className="text-sm"
+                    style={{ color: "var(--text-gray)" }}
+                  >
+                    Intelligent AI Agents for Business
+                  </div>
                 </div>
               </div>
               <p className="text-gray-600 max-w-md">
-                We build advanced chatbots and phone agents that handle bookings, 
-                integrate with your favorite tools, and provide 24/7 customer support.
+                We build advanced chatbots and phone agents that handle
+                bookings, integrate with your favorite tools, and provide 24/7
+                customer support.
               </p>
             </div>
-            
+
             <div>
-              <h3 className="font-semibold mb-4" style={{ color: 'var(--primary-dark)' }}>Quick Links</h3>
+              <h3
+                className="font-semibold mb-4"
+                style={{ color: "var(--primary-dark)" }}
+              >
+                Quick Links
+              </h3>
               <ul className="space-y-2">
                 {navigationItems.map((item) => (
                   <li key={item.name}>
@@ -198,7 +247,12 @@ export default function Layout({ children, currentPageName }) {
             </div>
 
             <div>
-              <h3 className="font-semibold mb-4" style={{ color: 'var(--primary-dark)' }}>Contact</h3>
+              <h3
+                className="font-semibold mb-4"
+                style={{ color: "var(--primary-dark)" }}
+              >
+                Contact
+              </h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-2 text-gray-600">
                   <Mail className="w-4 h-4" />
@@ -211,7 +265,7 @@ export default function Layout({ children, currentPageName }) {
               </div>
             </div>
           </div>
-          
+
           <div className="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
             <p>&copy; 2024 MWave Consulting. All rights reserved.</p>
           </div>
@@ -219,4 +273,4 @@ export default function Layout({ children, currentPageName }) {
       </footer>
     </div>
   );
-} 
+}

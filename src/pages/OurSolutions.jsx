@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -20,26 +20,6 @@ import {
 } from "lucide-react";
 
 export default function OurSolutions() {
-  useEffect(() => {
-    const observerCallback = (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("fade-in");
-        }
-      });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, {
-      threshold: 0.1,
-      rootMargin: "0px 0px -50px 0px",
-    });
-
-    const elements = document.querySelectorAll(".animate-on-scroll");
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   const solutions = [
     {
       icon: Bot,
@@ -164,51 +144,51 @@ export default function OurSolutions() {
   const integrationLogos = [
     {
       name: "Salesforce",
-      logo: "https://logos-world.net/wp-content/uploads/2020/10/Salesforce-Logo.png",
+      logo: "https://www.vectorlogo.zone/logos/salesforce/salesforce-ar21.svg",
     },
     {
       name: "Oracle",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Oracle-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/2560px-Oracle_logo.svg.png",
     },
     {
       name: "Google Calendar",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Google-Calendar-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Calendar_icon_%282020%29.svg/1200px-Google_Calendar_icon_%282020%29.svg.png",
     },
     {
       name: "Google Sheets",
-      logo: "https://logos-world.net/wp-content/uploads/2021/11/Google-Sheets-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/a/ae/Google_Sheets_2020_Logo.svg",
     },
     {
       name: "Notion",
-      logo: "https://logos-world.net/wp-content/uploads/2021/03/Notion-Logo.png",
-    },
-    {
-      name: "HubSpot",
-      logo: "https://logos-world.net/wp-content/uploads/2021/02/HubSpot-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Notion_app_logo.png/1200px-Notion_app_logo.png",
     },
     {
       name: "Microsoft 365",
-      logo: "https://logos-world.net/wp-content/uploads/2020/09/Microsoft-365-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Microsoft_logo_%282012%29.svg/2560px-Microsoft_logo_%282012%29.svg.png",
     },
     {
       name: "Slack",
-      logo: "https://logos-world.net/wp-content/uploads/2020/10/Slack-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Slack_icon_2019.svg/2048px-Slack_icon_2019.svg.png",
     },
     {
       name: "Zoom",
-      logo: "https://logos-world.net/wp-content/uploads/2020/12/Zoom-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Zoom_Logo_2022.svg/2880px-Zoom_Logo_2022.svg.png",
     },
     {
       name: "Stripe",
-      logo: "https://logos-world.net/wp-content/uploads/2021/03/Stripe-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Stripe_Logo%2C_revised_2016.svg/2560px-Stripe_Logo%2C_revised_2016.svg.png",
+    },
+    {
+      name: "Hubspot",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/HubSpot_Logo.svg/2880px-HubSpot_Logo.svg.png",
     },
     {
       name: "Zapier",
-      logo: "https://logos-world.net/wp-content/uploads/2021/10/Zapier-Logo.png",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Zapier_logo.svg",
     },
     {
-      name: "Monday.com",
-      logo: "https://logos-world.net/wp-content/uploads/2021/11/Monday-Logo.png",
+      name: "Open AI",
+      logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/OpenAI_logo_2025_%28wordmark%29.svg/2880px-OpenAI_logo_2025_%28wordmark%29.svg.png",
     },
   ];
 
@@ -223,7 +203,7 @@ export default function OurSolutions() {
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center animate-on-scroll">
+          <div className="text-center">
             <h1
               className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8"
               style={{ color: "var(--primary-dark)" }}
@@ -241,7 +221,7 @@ export default function OurSolutions() {
       {/* Main Services */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -256,12 +236,7 @@ export default function OurSolutions() {
 
           <div className="space-y-16">
             {solutions.map((solution, index) => (
-              <Card
-                key={index}
-                className={`animate-on-scroll fade-in-delay-${
-                  index + 1
-                } border-0 shadow-xl overflow-hidden`}
-              >
+              <Card key={index} className="border-0 shadow-xl overflow-hidden">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                   <CardHeader className="p-8 lg:p-12">
                     <div className="flex items-center mb-6">
@@ -341,7 +316,7 @@ export default function OurSolutions() {
       {/* Wedding Venue Use Case */}
       <section className="py-20" style={{ backgroundColor: "var(--bg-light)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -358,9 +333,7 @@ export default function OurSolutions() {
             {weddingVenueSteps.map((step, index) => (
               <Card
                 key={index}
-                className={`animate-on-scroll fade-in-delay-${
-                  index + 1
-                } hover-lift smooth-transition border-0 shadow-lg bg-white relative`}
+                className="hover-lift smooth-transition border-0 shadow-lg bg-white relative"
               >
                 <CardContent className="p-6 text-center">
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
@@ -394,7 +367,7 @@ export default function OurSolutions() {
             ))}
           </div>
 
-          <div className="mt-16 text-center animate-on-scroll">
+          <div className="mt-16 text-center">
             <Card className="border-0 shadow-xl bg-white max-w-4xl mx-auto">
               <CardContent className="p-8">
                 <h3
@@ -446,7 +419,7 @@ export default function OurSolutions() {
       {/* Integrations */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 animate-on-scroll">
+          <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
@@ -462,9 +435,7 @@ export default function OurSolutions() {
             {integrationLogos.map((integration, index) => (
               <div
                 key={index}
-                className={`animate-on-scroll fade-in-delay-${
-                  index + 1
-                } hover-lift smooth-transition bg-white rounded-xl p-6 shadow-lg group`}
+                className="hover-lift smooth-transition bg-white rounded-xl p-6 shadow-lg group"
               >
                 <img
                   src={integration.logo}
@@ -475,7 +446,7 @@ export default function OurSolutions() {
             ))}
           </div>
 
-          <div className="text-center animate-on-scroll">
+          <div className="text-center">
             <p className="text-lg text-gray-600 mb-8">
               Plus 500+ more integrations available through APIs and webhooks
             </p>
@@ -485,7 +456,10 @@ export default function OurSolutions() {
               className="shadow-lg hover:shadow-xl smooth-transition"
               style={{ backgroundColor: "var(--primary-dark)" }}
             >
-              <Link to={createPageUrl("Contact")} className="flex items-center">
+              <Link
+                to={createPageUrl("Contact")}
+                className="flex items-center text-white"
+              >
                 Start Your Integration
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
