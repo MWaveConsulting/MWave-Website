@@ -12,7 +12,11 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Mail, Phone, Calendar, MapPin, CheckCircle, Send } from "lucide-react";
-import { SendEmail, sendEmailViaMailto } from "@/integrations/Core";
+import {
+  SendEmail,
+  sendEmailViaMailto,
+  sendToMakeWebhook,
+} from "@/integrations/Core";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -39,79 +43,14 @@ export default function Contact() {
     setIsSubmitting(true);
     setEmailError("");
 
-    const emailBody = `
-      <div style="font-family: Arial, sans-serif; line-height: 1.6; max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); padding: 24px;">
-        <div style="background: linear-gradient(135deg, #1f2428 0%, #37404a 100%); color: white; padding: 20px; border-radius: 8px 8px 0 0; margin: -24px -24px 24px -24px;">
-          <h1 style="margin: 0; font-size: 24px; font-weight: bold;">🌊 New MWave Website Inquiry</h1>
-          <p style="margin: 8px 0 0 0; opacity: 0.9;">You have received a new contact form submission</p>
-        </div>
-        
-        <div style="background-color: #f8fafc; border-radius: 8px; padding: 20px; margin-bottom: 20px;">
-          <h2 style="color: #1f2428; margin: 0 0 16px 0; font-size: 18px; border-bottom: 2px solid #e5e7eb; padding-bottom: 8px;">📋 Contact Information</h2>
-          <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
-            <tr style="border-bottom: 1px solid #e5e7eb;">
-              <td style="padding: 12px 8px; font-weight: 600; width: 140px; color: #37404a;">👤 Name:</td>
-              <td style="padding: 12px 8px; color: #1f2428;">${
-                formData.name
-              }</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e7eb;">
-              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">📧 Email:</td>
-              <td style="padding: 12px 8px; color: #1f2428;">${
-                formData.email
-              }</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e7eb;">
-              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">📞 Phone:</td>
-              <td style="padding: 12px 8px; color: #1f2428;">${
-                formData.phone || "Not provided"
-              }</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e7eb;">
-              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">🏢 Company:</td>
-              <td style="padding: 12px 8px; color: #1f2428;">${
-                formData.company || "Not provided"
-              }</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #e5e7eb;">
-              <td style="padding: 12px 8px; font-weight: 600; color: #37404a;">🎯 Service Interest:</td>
-              <td style="padding: 12px 8px; color: #1f2428;">${
-                formData.service || "Not specified"
-              }</td>
-            </tr>
-          </table>
-        </div>
-        
-        <div style="background-color: #ffffff; border: 2px solid #e5e7eb; border-radius: 8px; padding: 20px;">
-          <h3 style="color: #1f2428; margin: 0 0 16px 0; font-size: 16px; display: flex; align-items: center;">
-            💬 Message
-          </h3>
-          <div style="background-color: #f8fafc; padding: 16px; border-radius: 6px; border-left: 4px solid #2563eb; font-size: 14px; line-height: 1.6; color: #1f2428;">
-            ${formData.message.replace(/\n/g, "<br>")}
-          </div>
-        </div>
-        
-        <div style="margin-top: 24px; padding: 16px; background-color: #f0f9ff; border-radius: 6px; border-left: 4px solid #2563eb;">
-          <p style="margin: 0; font-size: 12px; color: #1f2428; opacity: 0.8;">
-            📅 Submitted on: ${new Date().toLocaleString()}<br>
-            🌐 Source: MWave Consulting Website Contact Form
-          </p>
-        </div>
-      </div>
-    `;
-
     try {
-      await SendEmail({
-        to: "mwave.consulting@protonmail.com",
-        from_name: "MWave Website Inquiry",
-        subject: `🌊 New Contact Form Submission from ${formData.name}`,
-        body: emailBody,
-      });
+      // Send to Make.com webhook
+      await sendToMakeWebhook(formData);
       setIsSubmitted(true);
     } catch (error) {
-      console.error("Email sending failed:", error);
+      console.error("Form submission failed:", error);
       setEmailError(
-        "Failed to send email. Please try again or use the alternative method below."
+        "Failed to submit form. Please try again or use the alternative method below."
       );
     } finally {
       setIsSubmitting(false);

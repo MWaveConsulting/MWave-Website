@@ -67,3 +67,46 @@ ${formData.message}
   )}&body=${encodeURIComponent(body)}`;
   window.open(mailtoLink);
 };
+
+// Make.com webhook integration
+export const sendToMakeWebhook = async (formData) => {
+  const webhookUrl =
+    "https://hook.eu2.make.com/ymamnv1bax2u8897otykny1w3d3pffem";
+
+  const payload = {
+    name: formData.name,
+    email: formData.email,
+    phone: formData.phone || "Not provided",
+    company: formData.company || "Not provided",
+    service: formData.service || "Not specified",
+    message: formData.message,
+    submission_date: new Date().toLocaleDateString("en-GB", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    }),
+  };
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (response.ok) {
+      return { success: true };
+    } else {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Webhook submission failed:", error);
+    throw new Error("Failed to submit form data");
+  }
+};
