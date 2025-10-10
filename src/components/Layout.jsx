@@ -27,7 +27,7 @@ export default function Layout({ children, currentPageName }) {
         {`
           :root {
             --primary-dark: #1f2428;
-            --cta-blue: #2563eb;
+            --cta-blue:rgb(74, 127, 0);
             --primary-light: #37404a;
             --text-gray: #6b7280;
             --border-gray: #e5e7eb;
@@ -218,7 +218,7 @@ export default function Layout({ children, currentPageName }) {
                     className="text-sm"
                     style={{ color: "var(--text-gray)" }}
                   >
-                    Intelligent AI Agents for Business
+                    Intelligent AI Agents for Venues
                   </div>
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default function Layout({ children, currentPageName }) {
           </div>
 
           <div className="mt-8 pt-8 border-t border-gray-200 text-center text-gray-500">
-            <p>&copy; 2024 MWave Consulting. All rights reserved.</p>
+            <p>&copy; 2025 MWave Consulting. All rights reserved.</p>
           </div>
         </div>
       </footer>

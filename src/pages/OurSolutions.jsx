@@ -321,10 +321,10 @@ export default function OurSolutions() {
               className="text-3xl sm:text-4xl font-bold mb-6"
               style={{ color: "var(--primary-dark)" }}
             >
-              Real-World Example: Wedding Venue Booking Agent
+              Real-World Example: Venue Booking Agent
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our AI agents transform the booking process for wedding
+              See how our AI agents transform the booking process for 
               venues, from initial inquiry to confirmed reservation
             </p>
           </div>

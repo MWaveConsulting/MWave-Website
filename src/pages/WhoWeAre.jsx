@@ -284,7 +284,7 @@ export default function WhoWeAre() {
             Why Choose MWave Consulting?
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
             <div className="space-y-3">
               <div
                 className="text-3xl font-bold"
@@ -294,23 +294,15 @@ export default function WhoWeAre() {
               </div>
               <div className="text-gray-600">Years Combined Experience</div>
             </div>
+            
             <div className="space-y-3">
               <div
                 className="text-3xl font-bold"
                 style={{ color: "var(--primary-dark)" }}
               >
-                100+
+                100%
               </div>
-              <div className="text-gray-600">Enterprise Projects Delivered</div>
-            </div>
-            <div className="space-y-3">
-              <div
-                className="text-3xl font-bold"
-                style={{ color: "var(--primary-dark)" }}
-              >
-                99%
-              </div>
-              <div className="text-gray-600">Client Satisfaction Rate</div>
+              <div className="text-gray-600">Commitment To Your Satisfaction</div>
             </div>
           </div>
 
@@ -320,6 +312,17 @@ export default function WhoWeAre() {
             understand both the technical capabilities of AI and the strategic
             needs of modern businesses.
           </p>
+          <div className="space-y-3 mt-8">
+            <div
+              className="text-2xl font-bold"
+              style={{ color: "var(--primary-dark)" }}
+            >
+              Our Guarantee:
+            </div>
+            <div className="text-gray-600">
+              If you're not happy we continue working with you until you are
+            </div>
+          </div>
         </div>
       </section>
     </div>

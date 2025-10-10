@@ -137,7 +137,7 @@ export default function Home() {
                 </span>
                 <br />
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Your Business
+                  Your Venue
                 </span>
               </h1>
             </motion.div>
