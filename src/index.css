@@ -4,12 +4,17 @@
 
 @layer base {
   :root {
-    --primary-dark: #1f2428;
-    --cta-blue: #2563eb;
-    --primary-light: #37404a;
-    --text-gray: #6b7280;
-    --border-gray: #e5e7eb;
-    --bg-light: #f8fafc;
+    /* Rustic, light-but-not-white palette */
+    --bg-rustic: #f3efe7; /* parchment */
+    --bg-light: #efeae2; /* section light */
+    --primary-dark: #5f6f52; /* sage/dark olive */
+    --cta-blue: #a68a64; /* warm bronze */
+    --primary-light: #8f9779; /* muted sage */
+    --text-gray: #6b6a66; /* warm gray */
+    --border-gray: #e4ddd3; /* parchment border */
+    /* Icon theme (pastel) */
+    --icon-contrast: #48543c; /* deeper olive for strokes */
+    --icon-light: #dfe5d6; /* light sage for fills/lines */
   }
 }
 
@@ -19,9 +24,9 @@
   }
 
   .glass-card {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(8px);
+    background: rgba(95, 111, 82, 0.08); /* pastel sage tint */
+    border: 1px solid rgba(228, 221, 211, 0.6); /* parchment border */
   }
 
   .hover-lift:hover {

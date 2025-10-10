@@ -4,12 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary-dark": "#1f2428",
-        "cta-blue": "#2563eb",
-        "primary-light": "#37404a",
-        "text-gray": "#6b7280",
-        "border-gray": "#e5e7eb",
-        "bg-light": "#f8fafc",
+        "primary-dark": "#5f6f52",
+        "cta-blue": "#a68a64",
+        "primary-light": "#8f9779",
+        "text-gray": "#6b6a66",
+        "border-gray": "#e4ddd3",
+        "bg-light": "#efeae2",
+        "bg-rustic": "#f3efe7",
       },
       animation: {
         "fade-in-up": "fadeInUp 0.6s ease-out forwards",

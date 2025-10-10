@@ -118,12 +118,8 @@ export default function Home() {
       <section
         ref={heroRef}
         className="relative overflow-hidden"
-        style={{
-          background:
-            "linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%)",
-        }}
+        style={{ background: "transparent" }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50"></div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
           <div className="text-center">
             <motion.div

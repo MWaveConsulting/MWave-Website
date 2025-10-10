@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Bot, Calendar, Phone, Mail, Menu, X } from "lucide-react";
+import BackgroundNetwork from "@/components/BackgroundNetwork";
 import { Button } from "@/components/ui/button";
 
 export default function Layout({ children, currentPageName }) {
@@ -21,7 +22,7 @@ export default function Layout({ children, currentPageName }) {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-rustic)" }}>
       <style>
         {`
           :root {
@@ -66,6 +67,9 @@ export default function Layout({ children, currentPageName }) {
           }
         `}
       </style>
+
+      {/* Background Animation Layer */}
+      <BackgroundNetwork />
 
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-gray-100">
@@ -189,10 +193,10 @@ export default function Layout({ children, currentPageName }) {
       </nav>
 
       {/* Main Content */}
-      <main className="pt-16">{children}</main>
+      <main className="pt-16 relative z-10">{children}</main>
 
       {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-200 mt-20">
+      <footer className="border-t border-[var(--border-gray)] mt-20 relative z-10" style={{ backgroundColor: "var(--bg-light)" }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">

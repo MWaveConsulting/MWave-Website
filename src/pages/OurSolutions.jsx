@@ -23,9 +23,9 @@ export default function OurSolutions() {
   const solutions = [
     {
       icon: Bot,
-      title: "AI Chatbots",
+      title: "AI Venue Chatbots",
       description:
-        "Intelligent conversational agents that provide instant customer support and handle complex inquiries 24/7.",
+        "Automate FAQs, brochure requests, and website chat so only qualified leads reach your team.",
       features: [
         "Advanced Natural Language Processing",
         "Multi-language Support",
@@ -43,9 +43,9 @@ export default function OurSolutions() {
     },
     {
       icon: Phone,
-      title: "Phone AI Agents",
+      title: "Phone AI for Bookings",
       description:
-        "Voice-enabled booking systems that handle calls professionally and manage appointments efficiently.",
+        "Answer and triage calls, check availability, and take deposits—without missing an inquiry.",
       features: [
         "Advanced Voice Recognition",
         "Natural Speech Synthesis",
@@ -65,7 +65,7 @@ export default function OurSolutions() {
       icon: Settings,
       title: "System Integrations",
       description:
-        "Seamless connections to your existing business tools for automated workflows and data synchronization.",
+        "Connect calendars, CRMs, and payments so your booking workflow runs end-to-end automatically.",
       features: [
         "CRM Integration (Salesforce, HubSpot)",
         "Calendar Management (Google, Outlook)",
@@ -85,7 +85,7 @@ export default function OurSolutions() {
       icon: Clock,
       title: "24/7 Automation",
       description:
-        "Round-the-clock business automation that ensures your services are always available to customers.",
+        "Never miss a lead: 24/7 coverage that filters noise and surfaces only the important conversations.",
       features: [
         "Always Available Service",
         "Instant Response Times",
@@ -264,7 +264,7 @@ export default function OurSolutions() {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {solution.features.map((feature, featureIndex) => (
                           <div key={featureIndex} className="flex items-center">
-                            <CheckCircle className="w-5 h-5 text-green-500 mr-3 flex-shrink-0" />
+                            <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" style={{ color: "var(--icon-contrast)" }} />
                             <span className="text-gray-600">{feature}</span>
                           </div>
                         ))}
@@ -292,10 +292,10 @@ export default function OurSolutions() {
                       ))}
                     </div>
 
-                    <div className="space-y-4">
-                      <div className="text-sm text-gray-600">
-                        <strong>Implementation Time:</strong> 2-4 weeks
-                      </div>
+                      <div className="space-y-4">
+                        <div className="text-sm text-gray-600">
+                          <strong>Implementation Time:</strong> Project scope
+                        </div>
                       <div className="text-sm text-gray-600">
                         <strong>Training Required:</strong> Minimal - we handle
                         everything
@@ -346,10 +346,14 @@ export default function OurSolutions() {
                   </div>
 
                   <div
-                    className="w-16 h-16 mx-auto mb-4 mt-4 rounded-2xl flex items-center justify-center shadow-md"
-                    style={{ backgroundColor: "var(--primary-dark)" }}
+                    className="w-16 h-16 mx-auto mb-4 mt-4 rounded-2xl flex items-center justify-center shadow-md border"
+                    style={{
+                      background:
+                        "linear-gradient(135deg, rgba(95,111,82,0.12) 0%, rgba(166,138,100,0.12) 100%)",
+                      borderColor: "var(--border-gray)",
+                    }}
                   >
-                    <step.icon className="w-8 h-8 text-white" />
+                    <step.icon className="w-8 h-8" style={{ color: "var(--icon-contrast)" }} />
                   </div>
 
                   <h3
