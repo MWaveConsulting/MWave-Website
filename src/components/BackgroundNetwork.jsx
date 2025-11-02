@@ -10,36 +10,45 @@ export default function BackgroundNetwork() {
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
 
-    const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
-      canvas.width = Math.floor(window.innerWidth * dpr);
-      canvas.height = Math.floor(window.innerHeight * dpr);
-      canvas.style.width = `${window.innerWidth}px`;
-      canvas.style.height = `${window.innerHeight}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    };
-
-    resize();
-    window.addEventListener("resize", resize);
-
     const NUM_PARTICLES = 80;
     const SPEED = 0.18;
     const LINK_DIST = 160;
 
     const palette = {
-      node: "rgba(95, 111, 82, 0.65)",
-      link: "rgba(72, 84, 60, 0.6)",
+      node: "rgba(255, 255, 255, 0.9)",
+      link: "rgba(255, 255, 255, 0.5)",
     };
 
     const initParticles = () => {
+      const rect = canvas.getBoundingClientRect();
       particlesRef.current = Array.from({ length: NUM_PARTICLES }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
+        x: Math.random() * rect.width,
+        y: Math.random() * rect.height,
         vx: (Math.random() - 0.5) * SPEED,
         vy: (Math.random() - 0.5) * SPEED,
         r: 1.8 + Math.random() * 1.6,
       }));
     };
+
+    const resize = () => {
+      const dpr = window.devicePixelRatio || 1;
+      const parent = canvas.parentElement;
+      if (!parent) return;
+
+      const width = parent.offsetWidth;
+      const height = parent.offsetHeight;
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      // Re-initialize particles when canvas size changes
+      initParticles();
+    };
+
+    resize();
+    window.addEventListener("resize", resize);
 
     const step = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -65,13 +74,14 @@ export default function BackgroundNetwork() {
         }
       }
 
+      const rect = canvas.getBoundingClientRect();
       for (const p of particlesRef.current) {
         p.x += p.vx;
         p.y += p.vy;
-        if (p.x < -20) p.x = window.innerWidth + 20;
-        if (p.x > window.innerWidth + 20) p.x = -20;
-        if (p.y < -20) p.y = window.innerHeight + 20;
-        if (p.y > window.innerHeight + 20) p.y = -20;
+        if (p.x < -20) p.x = rect.width + 20;
+        if (p.x > rect.width + 20) p.x = -20;
+        if (p.y < -20) p.y = rect.height + 20;
+        if (p.y > rect.height + 20) p.y = -20;
 
         ctx.fillStyle = palette.node;
         ctx.beginPath();
@@ -95,9 +105,13 @@ export default function BackgroundNetwork() {
     <canvas
       ref={canvasRef}
       aria-hidden
-      style={{ position: "fixed", inset: 0, zIndex: 0, pointerEvents: "none", opacity: 0.7 }}
+      style={{
+        position: "absolute",
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: "none",
+        opacity: 0.7,
+      }}
     />
   );
 }
-
-

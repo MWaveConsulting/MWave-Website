@@ -2,8 +2,8 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Bot, Calendar, Phone, Mail, Menu, X } from "lucide-react";
-import BackgroundNetwork from "@/components/BackgroundNetwork";
 import { Button } from "@/components/ui/button";
+import logo from "../../dist/assets/Latest-Logo.png";
 
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
@@ -22,7 +22,10 @@ export default function Layout({ children, currentPageName }) {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "var(--bg-rustic)" }}>
+    <div
+      className="min-h-screen"
+      style={{ backgroundColor: "var(--bg-rustic)" }}
+    >
       <style>
         {`
           :root {
@@ -68,9 +71,6 @@ export default function Layout({ children, currentPageName }) {
         `}
       </style>
 
-      {/* Background Animation Layer */}
-      <BackgroundNetwork />
-
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 glass-card border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -79,28 +79,13 @@ export default function Layout({ children, currentPageName }) {
             <div className="flex-none">
               <Link
                 to={createPageUrl("Home")}
-                className="flex items-center space-x-2 sm:space-x-3 group"
+                className="flex items-center group"
               >
-                <div
-                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center smooth-transition group-hover:scale-105"
-                  style={{ backgroundColor: "var(--primary-dark)" }}
-                >
-                  <Bot className="w-4 h-4 sm:w-6 sm:h-6 text-white" />
-                </div>
-                <div className="hidden sm:block">
-                  <div
-                    className="font-bold text-lg sm:text-xl"
-                    style={{ color: "var(--primary-dark)" }}
-                  >
-                    MWave
-                  </div>
-                  <div
-                    className="text-xs font-medium"
-                    style={{ color: "var(--text-gray)" }}
-                  >
-                    Consulting
-                  </div>
-                </div>
+                <img
+                  src={logo}
+                  alt="MWave Logo"
+                  className="w-16 h-16 sm:w-20 sm:h-20 object-contain group-hover:scale-105 smooth-transition"
+                />
               </Link>
             </div>
 
@@ -131,7 +116,7 @@ export default function Layout({ children, currentPageName }) {
               <Button
                 asChild
                 className="hidden md:flex shadow-md hover:shadow-lg smooth-transition text-white"
-                style={{ backgroundColor: "var(--cta-blue)" }}
+                style={{ backgroundColor: "#00167a" }}
               >
                 <Link to={createPageUrl("Contact")} className="text-white">
                   Get Started
@@ -196,7 +181,10 @@ export default function Layout({ children, currentPageName }) {
       <main className="pt-16 relative z-10">{children}</main>
 
       {/* Footer */}
-      <footer className="border-t border-[var(--border-gray)] mt-20 relative z-10" style={{ backgroundColor: "var(--bg-light)" }}>
+      <footer
+        className="border-t border-[var(--border-gray)] mt-20 relative z-10"
+        style={{ backgroundColor: "var(--bg-light)" }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">

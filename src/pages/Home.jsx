@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bot, Phone, Zap, Clock, ArrowRight, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
+import BackgroundNetwork from "@/components/BackgroundNetwork";
 
 export default function Home() {
   const heroRef = useRef(null);
@@ -118,9 +119,10 @@ export default function Home() {
       <section
         ref={heroRef}
         className="relative overflow-hidden"
-        style={{ background: "transparent" }}
+        style={{ background: "#00167a" }}
       >
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
+        <BackgroundNetwork />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
           <div className="text-center">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
@@ -128,17 +130,11 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <h1 className="text-3xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-                <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
-                  Intelligent AI Agents
-                </span>
+                <span className="text-white">Intelligent AI Agents</span>
                 <br />
-                <span style={{ color: "var(--primary-dark)" }}>
-                  That Transform
-                </span>
+                <span className="text-white">That Transform</span>
                 <br />
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Your Venue
-                </span>
+                <span className="text-white">Your Venue</span>
               </h1>
             </motion.div>
 
@@ -146,7 +142,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-lg sm:text-xl lg:text-2xl text-gray-600 mb-8 max-w-4xl mx-auto leading-relaxed px-4"
+              className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed px-4"
             >
               We build advanced chatbots and phone agents that handle bookings,
               integrate with your favorite tools, and provide 24/7 customer
@@ -162,12 +158,11 @@ export default function Home() {
               <Button
                 asChild
                 size="lg"
-                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl smooth-transition text-white"
-                style={{ backgroundColor: "var(--primary-dark)" }}
+                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl smooth-transition bg-white text-blue-900 hover:bg-gray-100"
               >
                 <Link
                   to={createPageUrl("Contact")}
-                  className="flex items-center text-white"
+                  className="flex items-center"
                 >
                   Ride the MWave <span className="ml-2">🏄</span>
                 </Link>
@@ -178,11 +173,16 @@ export default function Home() {
                 variant="outline"
                 className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 border-2 smooth-transition"
                 style={{
-                  borderColor: "var(--primary-dark)",
-                  color: "var(--primary-dark)",
+                  borderColor: "white",
+                  color: "white",
                 }}
               >
-                <Link to={createPageUrl("OurSolutions")}>View Solutions</Link>
+                <Link
+                  to={createPageUrl("OurSolutions")}
+                  className="hover:bg-white/10"
+                >
+                  View Solutions
+                </Link>
               </Button>
             </motion.div>
           </div>
@@ -196,13 +196,10 @@ export default function Home() {
           >
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div
-                  className="text-3xl lg:text-4xl font-bold mb-2"
-                  style={{ color: "var(--primary-dark)" }}
-                >
+                <div className="text-3xl lg:text-4xl font-bold mb-2 text-white">
                   {stat.number}
                 </div>
-                <div className="text-gray-600 font-medium">{stat.label}</div>
+                <div className="text-white/80 font-medium">{stat.label}</div>
               </div>
             ))}
           </motion.div>
