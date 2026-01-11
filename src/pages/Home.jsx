@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Bot, Phone, Zap, Clock, ArrowRight, CheckCircle } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 import BackgroundNetwork from "@/components/BackgroundNetwork";
 
@@ -11,49 +11,6 @@ export default function Home() {
   const heroRef = useRef(null);
   const servicesRef = useRef(null);
   const integrationsRef = useRef(null);
-
-  const services = [
-    {
-      icon: Bot,
-      title: "AI Chatbots",
-      description:
-        "Intelligent conversational agents that understand context, handle complex queries, and provide instant customer support 24/7.",
-      features: [
-        "Natural Language Processing",
-        "Multi-platform Integration",
-        "Real-time Analytics",
-      ],
-    },
-    {
-      icon: Phone,
-      title: "Phone AI Agents",
-      description:
-        "Voice-enabled booking systems that handle calls professionally, schedule appointments, and manage customer inquiries.",
-      features: ["Voice Recognition", "Appointment Scheduling", "Call Routing"],
-    },
-    {
-      icon: Zap,
-      title: "System Integrations",
-      description:
-        "Seamless connections to your existing CRM, calendar systems, and business tools for automated workflows.",
-      features: [
-        "CRM Synchronization",
-        "Calendar Management",
-        "Data Automation",
-      ],
-    },
-    {
-      icon: Clock,
-      title: "24/7 Automation",
-      description:
-        "Round-the-clock customer service that never sleeps, ensuring your business is always available to customers.",
-      features: [
-        "Always Available",
-        "Instant Responses",
-        "Escalation Management",
-      ],
-    },
-  ];
 
   const integrations = [
     {
@@ -106,20 +63,13 @@ export default function Home() {
     },
   ];
 
-  const stats = [
-    { number: "90%", label: "Reduction in Response Time" },
-    { number: "10x", label: "More Inquiries Handled" },
-    { number: "40%", label: "Increase in Bookings" },
-    { number: "500+", label: "Business Tools Integration" },
-  ];
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
       <section
         ref={heroRef}
         className="relative overflow-hidden"
-        style={{ background: "#00167a" }}
+        style={{ background: "var(--primary)" }}
       >
         <BackgroundNetwork />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
@@ -134,7 +84,7 @@ export default function Home() {
                 <br />
                 <span className="text-white">That Transform</span>
                 <br />
-                <span className="text-white">Your Venue</span>
+                <span className="text-white">Your Business</span>
               </h1>
             </motion.div>
 
@@ -144,9 +94,9 @@ export default function Home() {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="text-lg sm:text-xl lg:text-2xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed px-4"
             >
-              We build advanced chatbots and phone agents that handle bookings,
-              integrate with your favorite tools, and provide 24/7 customer
-              support
+              We build intelligent workflows that automate business processes,
+              integrate with your existing tools, and save time and operational
+              costs.
             </motion.p>
 
             <motion.div
@@ -158,7 +108,8 @@ export default function Home() {
               <Button
                 asChild
                 size="lg"
-                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl smooth-transition bg-white text-blue-900 hover:bg-gray-100"
+                className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-lg hover:shadow-xl smooth-transition bg-white hover:bg-gray-100"
+                style={{ color: "var(--primary)" }}
               >
                 <Link
                   to={createPageUrl("Contact")}
@@ -186,78 +137,201 @@ export default function Home() {
               </Button>
             </motion.div>
           </div>
-
-          {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-            className="mt-16 sm:mt-20 grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8"
-          >
-            {stats.map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl lg:text-4xl font-bold mb-2 text-white">
-                  {stat.number}
-                </div>
-                <div className="text-white/80 font-medium">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section ref={servicesRef} className="py-20 bg-white">
+      {/* The Thinking AI Buildout */}
+      <section
+        ref={servicesRef}
+        className="py-20"
+        style={{
+          background: "linear-gradient(to bottom, white, var(--background))",
+        }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
           <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6"
-              style={{ color: "var(--primary-dark)" }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
             >
-              What We Build
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Cutting-edge AI solutions designed to automate your business
-              processes and enhance customer experience
-            </p>
+              <p className="text-lg sm:text-xl font-semibold mb-4 text-gray-500 uppercase tracking-wide">
+                Introducing
+              </p>
+              <h2
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight"
+                style={{ color: "var(--primary-dark)" }}
+              >
+                The MWave AI Buildout
+              </h2>
+              <p className="text-xl sm:text-2xl text-gray-700 max-w-4xl mx-auto leading-relaxed font-medium">
+                A high-touch, done-with-you AI implementation where I personally
+                architect and build custom Thinking AI systems across your
+                sales, content, and operations.
+              </p>
+            </motion.div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-            {services.map((service, index) => (
-              <Card
-                key={index}
-                className="hover-lift smooth-transition border-0 shadow-lg"
+          {/* Timeline Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-center mb-12"
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-800">
+              From Bottlenecks To MWave AI
+            </h3>
+          </motion.div>
+
+          {/* Timeline Cards - Left to Right */}
+          <div className="relative">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-6">
+              {/* Week 1 */}
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
               >
-                <CardContent className="p-6 sm:p-8 text-center">
-                  <div
-                    className="w-16 h-16 mx-auto mb-6 rounded-2xl flex items-center justify-center shadow-md"
-                    style={{ backgroundColor: "var(--primary-dark)" }}
-                  >
-                    <service.icon className="w-8 h-8 text-white" />
-                  </div>
-                  <h3
-                    className="text-xl font-bold mb-4"
-                    style={{ color: "var(--primary-dark)" }}
-                  >
-                    {service.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6 leading-relaxed">
-                    {service.description}
-                  </p>
-                  <div className="space-y-2">
-                    {service.features.map((feature, featureIndex) => (
+                <Card className="h-full hover-lift smooth-transition border-2 shadow-xl bg-white">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-6">
                       <div
-                        key={featureIndex}
-                        className="flex items-center text-sm text-gray-500"
+                        className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg"
+                        style={{ backgroundColor: "var(--primary-dark)" }}
                       >
-                        <CheckCircle className="w-4 h-4 mr-2 text-green-500" />
-                        {feature}
+                        1
                       </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                      <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Phase 1
+                      </span>
+                    </div>
+                    <h3
+                      className="text-2xl font-bold mb-6"
+                      style={{ color: "var(--primary-dark)" }}
+                    >
+                      Discovery
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      We learn your business inside out. What's stuck in your
+                      head. Where the friction lives. What's actually costing
+                      you time and money.
+                    </p>
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-gray-600 text-sm italic leading-relaxed">
+                        Most consultants skip this. They show up with templates.
+                        We show up with questions—because your business isn't a
+                        template.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Weeks 2-3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <Card
+                  className="h-full hover-lift smooth-transition border-2 shadow-xl"
+                  style={{
+                    background:
+                      "linear-gradient(to bottom right, white, rgba(8, 145, 178, 0.05))",
+                  }}
+                >
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-6">
+                      <div
+                        className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg"
+                        style={{ backgroundColor: "var(--primary-dark)" }}
+                      >
+                        2
+                      </div>
+                      <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Phase 2
+                      </span>
+                    </div>
+                    <h3
+                      className="text-2xl font-bold mb-6"
+                      style={{ color: "var(--primary-dark)" }}
+                    >
+                      Build
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      I create your Thinking AI solutions. Your AI Clone. Your
+                      Command Center. Your problem-specific tools.
+                    </p>
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        Each one trained on your data. Your voice. Your way of
+                        thinking. Built to handle the unexpected.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Week 4 */}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+              >
+                <Card className="h-full hover-lift smooth-transition border-2 shadow-xl bg-white">
+                  <CardContent className="p-8">
+                    <div className="flex items-center justify-between mb-6">
+                      <div
+                        className="w-16 h-16 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-lg"
+                        style={{ backgroundColor: "var(--primary-dark)" }}
+                      >
+                        3
+                      </div>
+                      <span className="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+                        Phase 3
+                      </span>
+                    </div>
+                    <h3
+                      className="text-2xl font-bold mb-6"
+                      style={{ color: "var(--primary-dark)" }}
+                    >
+                      Deploy & Train
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed mb-4">
+                      Everything goes live. Your team learns the systems. We
+                      optimize until it runs smooth.
+                    </p>
+                    <div className="pt-4 border-t border-gray-200">
+                      <p className="text-gray-600 text-sm leading-relaxed">
+                        You walk away with Thinking AI that works - and a team
+                        that knows how to use it.
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+
+            {/* Flex Note */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="mt-12 text-center"
+            >
+              <p className="text-gray-600 italic max-w-2xl mx-auto">
+                If needed, we flex to 5-6 weeks. Same investment. The objective
+                matters more than the calendar.
+              </p>
+            </motion.div>
           </div>
         </div>
       </section>

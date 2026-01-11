@@ -4,13 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        "primary-dark": "#5f6f52",
-        "cta-blue": "#a68a64",
-        "primary-light": "#8f9779",
-        "text-gray": "#6b6a66",
-        "border-gray": "#e4ddd3",
-        "bg-light": "#efeae2",
-        "bg-rustic": "#f3efe7",
+        text: "#070813",
+        background: "#f1f2fa",
+        primary: "#00167a",
+        secondary: "#0891b2",
+        accent: "#ef4444",
+        // Legacy names for compatibility
+        "primary-dark": "#00167a",
+        "bg-light": "#f1f2fa",
+        "bg-rustic": "#f1f2fa",
+        "text-gray": "#070813",
+        "border-gray": "#e5e7eb",
       },
       animation: {
         "fade-in-up": "fadeInUp 0.6s ease-out forwards",

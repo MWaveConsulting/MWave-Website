@@ -4,17 +4,19 @@
 
 @layer base {
   :root {
-    /* Rustic, light-but-not-white palette */
-    --bg-rustic: #f3efe7; /* parchment */
-    --bg-light: #efeae2; /* section light */
-    --primary-dark: #5f6f52; /* sage/dark olive */
-    --cta-blue: #a68a64; /* warm bronze */
-    --primary-light: #8f9779; /* muted sage */
-    --text-gray: #6b6a66; /* warm gray */
-    --border-gray: #e4ddd3; /* parchment border */
-    /* Icon theme (pastel) */
-    --icon-contrast: #48543c; /* deeper olive for strokes */
-    --icon-light: #dfe5d6; /* light sage for fills/lines */
+    /* MWave Brand Colors */
+    --text: #070813; /* rgb(7, 8, 19) */
+    --background: #f1f2fa; /* rgb(241, 242, 250) */
+    --primary: #00167a; /* rgb(0, 22, 122) */
+    --secondary: #0891b2; /* rgb(8, 145, 178) */
+    --accent: #ef4444; /* rgb(239, 68, 68) */
+
+    /* Legacy variable names for compatibility */
+    --primary-dark: #00167a;
+    --bg-rustic: #f1f2fa;
+    --bg-light: #f1f2fa;
+    --text-gray: #070813;
+    --border-gray: #e5e7eb;
   }
 }
 
@@ -25,8 +27,8 @@
 
   .glass-card {
     backdrop-filter: blur(8px);
-    background: rgba(95, 111, 82, 0.08); /* pastel sage tint */
-    border: 1px solid rgba(228, 221, 211, 0.6); /* parchment border */
+    background: rgba(0, 22, 122, 0.05); /* primary color tint */
+    border: 1px solid rgba(241, 242, 250, 0.8); /* background border */
   }
 
   .hover-lift:hover {

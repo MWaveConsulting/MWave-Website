@@ -2,7 +2,7 @@ import React from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Users, Award, Target, Lightbulb } from "lucide-react";
-import pwcLogo from "../../dist/assets/Pwc-B1m78K8I.png";
+import pwcLogo from "../../dist/assets/Pwc.png";
 import ibmLogo from "../../dist/assets/IBM.png";
 
 export default function WhoWeAre() {
@@ -294,7 +294,7 @@ export default function WhoWeAre() {
               </div>
               <div className="text-gray-600">Years Combined Experience</div>
             </div>
-            
+
             <div className="space-y-3">
               <div
                 className="text-3xl font-bold"
@@ -302,7 +302,9 @@ export default function WhoWeAre() {
               >
                 100%
               </div>
-              <div className="text-gray-600">Commitment To Your Satisfaction</div>
+              <div className="text-gray-600">
+                Commitment To Your Satisfaction
+              </div>
             </div>
           </div>
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { createPageUrl } from "@/utils";
 import { Bot, Calendar, Phone, Mail, Menu, X } from "lucide-react";
@@ -8,6 +8,8 @@ import logo from "../../dist/assets/Latest-Logo.png";
 export default function Layout({ children, currentPageName }) {
   const location = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+  const calendarButtonRef = useRef(null);
+  const calendarInitialized = useRef(false);
 
   const navigationItems = [
     { name: "Home", path: "Home" },
@@ -21,6 +23,84 @@ export default function Layout({ children, currentPageName }) {
     return location.pathname === pageUrl;
   };
 
+  // Google Calendar Appointment Scheduling
+  useEffect(() => {
+    // Check if scripts are already loaded
+    const cssLoaded = document.querySelector(
+      'link[href="https://calendar.google.com/calendar/scheduling-button-script.css"]'
+    );
+    const jsLoaded = document.querySelector(
+      'script[src="https://calendar.google.com/calendar/scheduling-button-script.js"]'
+    );
+
+    // Load CSS if not already loaded
+    if (!cssLoaded) {
+      const link = document.createElement("link");
+      link.href =
+        "https://calendar.google.com/calendar/scheduling-button-script.css";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+    }
+
+    // Initialize calendar button (only once)
+    const initializeCalendar = () => {
+      if (
+        calendarInitialized.current ||
+        !window.calendar?.schedulingButton?.load ||
+        !calendarButtonRef.current
+      ) {
+        return;
+      }
+
+      // Clear any existing button first
+      if (calendarButtonRef.current.children.length > 0) {
+        calendarButtonRef.current.innerHTML = "";
+      }
+
+      try {
+        window.calendar.schedulingButton.load({
+          url: "https://calendar.google.com/calendar/appointments/schedules/AcZssZ090cuF-0Cn2VZUVZqDXCJ_qDxOvKXklingMh4ObyEyKmbz-VlclL10UUFoLC_ETDCA_aj-B3Tf?gv=true",
+          color: "#ef4444",
+          label: "Book an appointment",
+          target: calendarButtonRef.current,
+        });
+        calendarInitialized.current = true;
+      } catch (error) {
+        console.error("Error initializing calendar button:", error);
+      }
+    };
+
+    // Load JS if not already loaded
+    if (!jsLoaded) {
+      const script = document.createElement("script");
+      script.src =
+        "https://calendar.google.com/calendar/scheduling-button-script.js";
+      script.async = true;
+
+      script.onload = () => {
+        if (document.readyState === "complete") {
+          initializeCalendar();
+        } else {
+          window.addEventListener("load", initializeCalendar);
+        }
+      };
+
+      document.body.appendChild(script);
+    } else {
+      // Script already loaded, initialize when window is ready
+      if (document.readyState === "complete") {
+        initializeCalendar();
+      } else {
+        window.addEventListener("load", initializeCalendar, { once: true });
+      }
+    }
+
+    // Cleanup function
+    return () => {
+      calendarInitialized.current = false;
+    };
+  }, []);
+
   return (
     <div
       className="min-h-screen"
@@ -28,15 +108,6 @@ export default function Layout({ children, currentPageName }) {
     >
       <style>
         {`
-          :root {
-            --primary-dark: #1f2428;
-            --cta-blue:rgb(74, 127, 0);
-            --primary-light: #37404a;
-            --text-gray: #6b7280;
-            --border-gray: #e5e7eb;
-            --bg-light: #f8fafc;
-          }
-          
           .smooth-transition {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           }
@@ -60,8 +131,8 @@ export default function Layout({ children, currentPageName }) {
           
           .glass-card {
             backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(241, 242, 250, 0.9);
+            border: 1px solid rgba(241, 242, 250, 0.8);
           }
           
           .hover-lift:hover {
@@ -113,15 +184,8 @@ export default function Layout({ children, currentPageName }) {
 
             {/* Right: CTA & Mobile Menu */}
             <div className="flex-none flex items-center">
-              <Button
-                asChild
-                className="hidden md:flex shadow-md hover:shadow-lg smooth-transition text-white"
-                style={{ backgroundColor: "#00167a" }}
-              >
-                <Link to={createPageUrl("Contact")} className="text-white">
-                  Get Started
-                </Link>
-              </Button>
+              {/* Google Calendar Appointment Scheduling */}
+              <div ref={calendarButtonRef} className="hidden md:flex" />
               <button
                 className="md:hidden p-2 rounded-lg smooth-transition hover:bg-gray-100"
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -162,7 +226,7 @@ export default function Layout({ children, currentPageName }) {
               <Button
                 asChild
                 className="w-full mt-3 text-white"
-                style={{ backgroundColor: "var(--cta-blue)" }}
+                style={{ backgroundColor: "var(--primary)" }}
               >
                 <Link
                   to={createPageUrl("Contact")}
@@ -206,7 +270,7 @@ export default function Layout({ children, currentPageName }) {
                     className="text-sm"
                     style={{ color: "var(--text-gray)" }}
                   >
-                    Intelligent AI Agents for Venues
+                    Intelligent AI Agents 
                   </div>
                 </div>
               </div>
