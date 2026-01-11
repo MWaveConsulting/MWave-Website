@@ -50,16 +50,18 @@ export const SendEmail = async ({ to, from_name, subject, body }) => {
 
 // Alternative: Simple email using mailto link (fallback)
 export const sendEmailViaMailto = (formData) => {
-  const subject = `New Contact Form Submission from ${formData.name}`;
+  const subject = `New Contact Form Submission from ${
+    formData.fullName || formData.name || "Unknown"
+  }`;
   const body = `
-Name: ${formData.name}
-Email: ${formData.email}
+Name: ${formData.fullName || formData.name || "Not provided"}
+Email: ${formData.email || "Not provided"}
 Phone: ${formData.phone || "Not provided"}
 Company: ${formData.company || "Not provided"}
 Service Interest: ${formData.service || "Not specified"}
 
-Message:
-${formData.message}
+Project Details:
+${formData.projectDetails || formData.message || "Not provided"}
   `;
 
   const mailtoLink = `mailto:mwave.consulting@protonmail.com?subject=${encodeURIComponent(

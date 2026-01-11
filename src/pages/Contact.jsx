@@ -11,47 +11,156 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, Calendar, MapPin, CheckCircle, Send } from "lucide-react";
 import {
-  SendEmail,
-  sendEmailViaMailto,
-  sendToMakeWebhook,
-} from "@/integrations/Core";
+  Mail,
+  Phone,
+  Calendar,
+  MapPin,
+  CheckCircle,
+  Send,
+  X,
+} from "lucide-react";
+import { sendEmailViaMailto } from "@/integrations/Core";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
+    fullName: "",
     email: "",
     phone: "",
     company: "",
     service: "",
-    message: "",
+    projectDetails: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [emailError, setEmailError] = useState("");
+  const [errors, setErrors] = useState({});
+  const [submitError, setSubmitError] = useState("");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleInputChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
       [field]: value,
     }));
+    // Clear error for this field when user starts typing
+    if (errors[field]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
+    }
+    setSubmitError("");
+  };
+
+  // Client-side validation
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Required field validation
+    if (!formData.fullName.trim()) {
+      newErrors.fullName = "Full name is required";
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else {
+      // Email format validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+    }
+
+    if (!formData.projectDetails.trim()) {
+      newErrors.projectDetails = "Project details are required";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setSubmitError("");
+
+    // Validate form before submission
+    if (!validateForm()) {
+      console.log("Form validation failed:", errors);
+      return;
+    }
+
     setIsSubmitting(true);
-    setEmailError("");
 
     try {
-      // Send to Make.com webhook
-      await sendToMakeWebhook(formData);
-      setIsSubmitted(true);
-    } catch (error) {
-      console.error("Form submission failed:", error);
-      setEmailError(
-        "Failed to submit form. Please try again or use the alternative method below."
+      console.log("Submitting form data:", formData);
+
+      // Prepare data for Google Apps Script
+      const submissionData = {
+        fullName: formData.fullName.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim() || "",
+        company: formData.company.trim() || "",
+        service: formData.service || "",
+        projectDetails: formData.projectDetails.trim(),
+      };
+
+      // Send POST request to Google Apps Script
+      const response = await fetch(
+        "https://script.google.com/a/macros/mwave-news.com/s/AKfycbzJ8wd3Tj-mXont0RjCag48VsYcaqqeLi3-39nj7aixh9cFLwC9w1QaoqlUxx3hG9eetg/exec",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(submissionData),
+        }
       );
+
+      console.log("Response status:", response.status);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.text();
+      console.log("Response result:", result);
+
+      // Google Apps Script may return HTML even on success
+      // Check if response indicates success
+      if (
+        response.status === 200 ||
+        result.includes("success") ||
+        result === ""
+      ) {
+        // Success
+        setShowSuccess(true);
+        setIsSubmitted(true);
+
+        // Clear form
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          company: "",
+          service: "",
+          projectDetails: "",
+        });
+
+        // Hide success message after 5 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 5000);
+      } else {
+        throw new Error("Form submission failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setSubmitError(
+        "Failed to submit form. Please check your connection and try again, or use the alternative method below."
+      );
+
+      // Keep form data on error so user doesn't lose their input
     } finally {
       setIsSubmitting(false);
     }
@@ -81,14 +190,17 @@ export default function Contact() {
           <Button
             onClick={() => {
               setIsSubmitted(false);
+              setShowSuccess(false);
               setFormData({
-                name: "",
+                fullName: "",
                 email: "",
                 phone: "",
                 company: "",
                 service: "",
-                message: "",
+                projectDetails: "",
               });
+              setErrors({});
+              setSubmitError("");
             }}
             variant="outline"
             className="border-2"
@@ -150,21 +262,50 @@ export default function Contact() {
                   </p>
                 </CardHeader>
                 <CardContent className="p-8 pt-0">
+                  {/* Success Message */}
+                  {showSuccess && (
+                    <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg animate-in fade-in slide-in-from-top-2 duration-300">
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center">
+                          <CheckCircle className="w-5 h-5 text-green-600 mr-2" />
+                          <p className="text-green-800 font-medium">
+                            Message sent successfully! We'll get back to you
+                            within 24 hours.
+                          </p>
+                        </div>
+                        <button
+                          onClick={() => setShowSuccess(false)}
+                          className="text-green-600 hover:text-green-800"
+                        >
+                          <X className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  )}
+
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <Label htmlFor="name">Full Name *</Label>
+                        <Label htmlFor="fullName">Full Name *</Label>
                         <Input
-                          id="name"
+                          id="fullName"
                           type="text"
                           placeholder="Your full name"
-                          value={formData.name}
+                          value={formData.fullName}
                           onChange={(e) =>
-                            handleInputChange("name", e.target.value)
+                            handleInputChange("fullName", e.target.value)
                           }
-                          required
-                          className="h-12"
+                          className={`h-12 ${
+                            errors.fullName
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
+                          }`}
                         />
+                        {errors.fullName && (
+                          <p className="text-red-600 text-sm mt-1">
+                            {errors.fullName}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <Label htmlFor="email">Email Address *</Label>
@@ -176,9 +317,17 @@ export default function Contact() {
                           onChange={(e) =>
                             handleInputChange("email", e.target.value)
                           }
-                          required
-                          className="h-12"
+                          className={`h-12 ${
+                            errors.email
+                              ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                              : ""
+                          }`}
                         />
+                        {errors.email && (
+                          <p className="text-red-600 text-sm mt-1">
+                            {errors.email}
+                          </p>
+                        )}
                       </div>
                     </div>
 
@@ -241,31 +390,39 @@ export default function Contact() {
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="message">Project Details *</Label>
+                      <Label htmlFor="projectDetails">Project Details *</Label>
                       <Textarea
-                        id="message"
+                        id="projectDetails"
                         placeholder="Tell us about your business needs, current challenges, and goals for AI implementation..."
-                        value={formData.message}
+                        value={formData.projectDetails}
                         onChange={(e) =>
-                          handleInputChange("message", e.target.value)
+                          handleInputChange("projectDetails", e.target.value)
                         }
-                        required
-                        className="h-32 resize-none"
+                        className={`h-32 resize-none ${
+                          errors.projectDetails
+                            ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                            : ""
+                        }`}
                       />
+                      {errors.projectDetails && (
+                        <p className="text-red-600 text-sm mt-1">
+                          {errors.projectDetails}
+                        </p>
+                      )}
                     </div>
 
                     <Button
                       type="submit"
                       size="lg"
-                      className="w-full h-12 text-lg shadow-lg hover:shadow-xl smooth-transition text-white"
+                      className="w-full h-12 text-lg shadow-lg hover:shadow-xl smooth-transition text-white disabled:opacity-50 disabled:cursor-not-allowed"
                       style={{ backgroundColor: "var(--primary-dark)" }}
                       disabled={isSubmitting}
                     >
                       {isSubmitting ? (
-                        <>
+                        <div className="flex items-center text-white">
                           <div className="w-5 h-5 mr-2 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
                           Sending...
-                        </>
+                        </div>
                       ) : (
                         <div className="flex items-center text-white">
                           <Send className="w-5 h-5 mr-2" />
@@ -276,9 +433,12 @@ export default function Contact() {
                   </form>
 
                   {/* Error Message */}
-                  {emailError && (
-                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg">
-                      <p className="text-red-700 text-sm">{emailError}</p>
+                  {submitError && (
+                    <div className="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg animate-in fade-in slide-in-from-top-2 duration-300">
+                      <div className="flex items-start">
+                        <X className="w-5 h-5 text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+                        <p className="text-red-700 text-sm">{submitError}</p>
+                      </div>
                     </div>
                   )}
 
