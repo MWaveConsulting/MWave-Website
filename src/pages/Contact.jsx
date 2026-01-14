@@ -477,7 +477,7 @@ export default function Contact() {
                           Email Us
                         </h4>
                         <p className="text-gray-600">
-                          mwave.consulting@protonmail.com
+                          zia.kader@mwaveconsulting.com
                         </p>
                       </div>
                     </div>

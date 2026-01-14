@@ -124,8 +124,8 @@ export default function Home() {
                 variant="outline"
                 className="text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 border-2 smooth-transition"
                 style={{
-                  borderColor: "white",
-                  color: "white",
+                  borderColor: "var(--primary-dark)",
+                  color: "var(--primary-dark)",
                 }}
               >
                 <Link

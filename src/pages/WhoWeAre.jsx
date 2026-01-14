@@ -281,50 +281,13 @@ export default function WhoWeAre() {
             className="text-3xl sm:text-4xl font-bold mb-8"
             style={{ color: "var(--primary-dark)" }}
           >
-            Why Choose MWave Consulting?
+            Our Guarantee
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <div className="space-y-3">
-              <div
-                className="text-3xl font-bold"
-                style={{ color: "var(--primary-dark)" }}
-              >
-                10+
-              </div>
-              <div className="text-gray-600">Years Combined Experience</div>
-            </div>
-
-            <div className="space-y-3">
-              <div
-                className="text-3xl font-bold"
-                style={{ color: "var(--primary-dark)" }}
-              >
-                100%
-              </div>
-              <div className="text-gray-600">
-                Commitment To Your Satisfaction
-              </div>
-            </div>
-          </div>
-
           <p className="text-xl text-gray-600 leading-relaxed">
-            When you choose MWave Consulting, you're not just getting an AI
-            solution—you're partnering with seasoned professionals who
-            understand both the technical capabilities of AI and the strategic
-            needs of modern businesses.
+            If you're not happy we continue working with you until you are
+            happy.
           </p>
-          <div className="space-y-3 mt-8">
-            <div
-              className="text-2xl font-bold"
-              style={{ color: "var(--primary-dark)" }}
-            >
-              Our Guarantee:
-            </div>
-            <div className="text-gray-600">
-              If you're not happy we continue working with you until you are
-            </div>
-          </div>
         </div>
       </section>
     </div>

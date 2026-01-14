@@ -2,8 +2,6 @@ import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { createPageUrl } from "@/utils";
 import {
   Bot,
   Phone,
@@ -192,230 +190,341 @@ export default function OurSolutions() {
     },
   ];
 
+  // Tree diagram data based on PDF
+  const treeData = {
+    aiAutomation: {
+      title: "AI & Automation",
+      description:
+        "We remove bottlenecks by turning repetitive workflows into intelligent systems.",
+      waves: [
+        {
+          number: 1,
+          title: "Discovery",
+          description:
+            "We deeply understand your business to identify what's really slowing you down and costing you money & time.",
+        },
+        {
+          number: 2,
+          title: "Build",
+          description:
+            "We build custom AI systems trained on your data, business, voice, and way of thinking to solve your specific problems.",
+        },
+        {
+          number: 3,
+          title: "Deploy & Train",
+          description:
+            "We launch, train your team, and optimise until the AI works smoothly in real-world use.",
+        },
+      ],
+    },
+    leadGeneration: {
+      title: "AI Lead Generation",
+      description:
+        "We build end-to-end lead engines that qualify and book clients automatically.",
+      steps: [
+        { number: 1, title: "Social Media Ads & Website" },
+        { number: 2, title: "Calendar Booking" },
+        { number: 3, title: "AI Caller" },
+        { number: 4, title: "Onboarding" },
+      ],
+      benefits: [
+        "Faster response times",
+        "Only qualified leads reach your calendar",
+        "Scales without hiring",
+      ],
+    },
+  };
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section */}
+      {/* Tree Diagram Section */}
       <section
-        className="py-20 sm:py-32"
+        className="py-20"
         style={{
-          background:
-            "linear-gradient(135deg, var(--bg-light) 0%, #ffffff 100%)",
+          background: "linear-gradient(135deg, #f1f2fa 0%, #ffffff 100%)",
         }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8"
-              style={{ color: "var(--primary-dark)" }}
-            >
-              Our Solutions
-            </h1>
-            <p className="text-xl sm:text-2xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-              Comprehensive AI agent solutions designed to transform your
-              business operations and enhance customer experience
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Services */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
-              style={{ color: "var(--primary-dark)" }}
+              style={{ color: "#070813" }}
             >
-              Complete AI Agent Suite
+              Solutions Overview
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From chatbots to phone agents, we build intelligent automation
-              that works seamlessly with your business
+              Two comprehensive approaches to transform your business
             </p>
           </div>
 
-          <div className="space-y-16">
-            {solutions.map((solution, index) => (
-              <Card key={index} className="border-0 shadow-xl overflow-hidden">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
-                  <CardHeader className="p-8 lg:p-12">
-                    <div className="flex items-center mb-6">
-                      <div
-                        className="w-16 h-16 rounded-2xl flex items-center justify-center shadow-lg mr-4"
-                        style={{ backgroundColor: "var(--primary-dark)" }}
-                      >
-                        <solution.icon className="w-8 h-8 text-white" />
-                      </div>
-                      <CardTitle
-                        className="text-2xl lg:text-3xl font-bold"
-                        style={{ color: "var(--primary-dark)" }}
-                      >
-                        {solution.title}
-                      </CardTitle>
-                    </div>
-                    <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                      {solution.description}
-                    </p>
-
-                    <div className="mb-8">
-                      <h4 className="font-semibold text-gray-900 mb-4">
-                        Key Features:
-                      </h4>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                        {solution.features.map((feature, featureIndex) => (
-                          <div key={featureIndex} className="flex items-center">
-                            <CheckCircle className="w-5 h-5 mr-3 flex-shrink-0" style={{ color: "var(--icon-contrast)" }} />
-                            <span className="text-gray-600">{feature}</span>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </CardHeader>
-
-                  <CardContent className="p-8 lg:p-12 bg-gray-50">
-                    <h4 className="font-semibold text-gray-900 mb-6 text-lg">
-                      Perfect for:
-                    </h4>
-                    <div className="grid grid-cols-2 gap-4 mb-8">
-                      {solution.useCases.map((useCase, caseIndex) => (
-                        <Badge
-                          key={caseIndex}
-                          variant="secondary"
-                          className="px-4 py-2 text-center justify-center"
-                          style={{
-                            backgroundColor: "var(--primary-dark)",
-                            color: "white",
-                          }}
-                        >
-                          {useCase}
-                        </Badge>
-                      ))}
-                    </div>
-
-                      <div className="space-y-4">
-                        <div className="text-sm text-gray-600">
-                          <strong>Implementation Time:</strong> Project scope
-                        </div>
-                      <div className="text-sm text-gray-600">
-                        <strong>Training Required:</strong> Minimal - we handle
-                        everything
-                      </div>
-                      <div className="text-sm text-gray-600">
-                        <strong>Ongoing Support:</strong> 24/7 monitoring &
-                        maintenance
-                      </div>
-                    </div>
-                  </CardContent>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Wedding Venue Use Case */}
-      <section className="py-20" style={{ backgroundColor: "var(--bg-light)" }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2
-              className="text-3xl sm:text-4xl font-bold mb-6"
-              style={{ color: "var(--primary-dark)" }}
-            >
-              Real-World Example: Venue Booking Agent
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              See how our AI agents transform the booking process for 
-              venues, from initial inquiry to confirmed reservation
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {weddingVenueSteps.map((step, index) => (
-              <Card
-                key={index}
-                className="hover-lift smooth-transition border-0 shadow-lg bg-white relative"
+          {/* Tree Structure */}
+          <div className="relative max-w-6xl mx-auto">
+            {/* Root Node */}
+            <div className="flex justify-center mb-12">
+              <div
+                className="text-white px-12 py-6 rounded-2xl shadow-2xl"
+                style={{
+                  background:
+                    "linear-gradient(135deg, #00167a 0%, #0891b2 100%)",
+                }}
               >
-                <CardContent className="p-6 text-center">
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <h3 className="text-3xl font-bold text-center">Solutions</h3>
+              </div>
+            </div>
+
+            {/* Connecting Lines from Root */}
+            <div className="relative h-16 mb-8">
+              <svg
+                className="absolute inset-0 w-full h-full"
+                style={{ overflow: "visible" }}
+              >
+                <line
+                  x1="50%"
+                  y1="0"
+                  x2="25%"
+                  y2="100%"
+                  stroke="#00167a"
+                  strokeWidth="3"
+                />
+                <line
+                  x1="50%"
+                  y1="0"
+                  x2="75%"
+                  y2="100%"
+                  stroke="#00167a"
+                  strokeWidth="3"
+                />
+              </svg>
+            </div>
+
+            {/* Main Branches */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12">
+              {/* AI & Automation Branch */}
+              <div className="flex flex-col items-center h-full">
+                <Card
+                  className="w-full border-2 shadow-xl hover:shadow-2xl transition-shadow h-full flex flex-col"
+                  style={{
+                    borderColor: "#00167a",
+                    background:
+                      "linear-gradient(135deg, rgba(0, 22, 122, 0.05) 0%, rgba(8, 145, 178, 0.05) 100%)",
+                  }}
+                >
+                  <CardHeader className="text-center pb-4">
                     <div
-                      className="w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold"
-                      style={{ backgroundColor: "var(--primary-dark)" }}
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center shadow-lg"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #00167a 0%, #0891b2 100%)",
+                      }}
                     >
-                      {index + 1}
+                      <Settings className="w-8 h-8 text-white" />
                     </div>
+                    <CardTitle
+                      className="text-2xl font-bold"
+                      style={{ color: "#070813" }}
+                    >
+                      {treeData.aiAutomation.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex items-center">
+                    <p className="text-center text-gray-700 text-sm leading-relaxed">
+                      {treeData.aiAutomation.description}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Sub-branches for AI Automation */}
+                <div className="relative h-12 w-full">
+                  <svg className="absolute inset-0 w-full h-full">
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="16%"
+                      y2="100%"
+                      stroke="#00167a"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="50%"
+                      y2="100%"
+                      stroke="#00167a"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="84%"
+                      y2="100%"
+                      stroke="#00167a"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
+
+                <div className="grid grid-cols-3 gap-4 w-full mt-4">
+                  {treeData.aiAutomation.waves.map((wave) => (
+                    <Card
+                      key={wave.number}
+                      className="border shadow-md hover:shadow-lg transition-shadow bg-white"
+                      style={{ borderColor: "#0891b2" }}
+                    >
+                      <CardContent className="p-4 text-center">
+                        <div
+                          className="w-10 h-10 mx-auto mb-3 rounded-full flex items-center justify-center text-white font-bold text-sm"
+                          style={{ backgroundColor: "#00167a" }}
+                        >
+                          {wave.number}
+                        </div>
+                        <h4
+                          className="font-bold mb-2 text-sm"
+                          style={{ color: "#070813" }}
+                        >
+                          {wave.title}
+                        </h4>
+                        <p className="text-xs text-gray-600 leading-relaxed">
+                          {wave.description}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* AI Lead Generation Branch */}
+              <div className="flex flex-col items-center h-full">
+                <Card
+                  className="w-full border-2 shadow-xl hover:shadow-2xl transition-shadow h-full flex flex-col"
+                  style={{
+                    borderColor: "#0891b2",
+                    background:
+                      "linear-gradient(135deg, rgba(8, 145, 178, 0.05) 0%, rgba(239, 68, 68, 0.05) 100%)",
+                  }}
+                >
+                  <CardHeader className="text-center pb-4">
+                    <div
+                      className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center shadow-lg"
+                      style={{
+                        background:
+                          "linear-gradient(135deg, #0891b2 0%, #ef4444 100%)",
+                      }}
+                    >
+                      <Users className="w-8 h-8 text-white" />
+                    </div>
+                    <CardTitle
+                      className="text-2xl font-bold"
+                      style={{ color: "#070813" }}
+                    >
+                      {treeData.leadGeneration.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex items-center">
+                    <p className="text-center text-gray-700 text-sm leading-relaxed">
+                      {treeData.leadGeneration.description}
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Sub-branches for Lead Generation */}
+                <div className="relative h-12 w-full">
+                  <svg className="absolute inset-0 w-full h-full">
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="12.5%"
+                      y2="100%"
+                      stroke="#0891b2"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="37.5%"
+                      y2="100%"
+                      stroke="#0891b2"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="62.5%"
+                      y2="100%"
+                      stroke="#0891b2"
+                      strokeWidth="2"
+                    />
+                    <line
+                      x1="50%"
+                      y1="0"
+                      x2="87.5%"
+                      y2="100%"
+                      stroke="#0891b2"
+                      strokeWidth="2"
+                    />
+                  </svg>
+                </div>
+
+                <div className="space-y-4 w-full mt-4">
+                  <div className="grid grid-cols-4 gap-3">
+                    {treeData.leadGeneration.steps.map((step) => (
+                      <Card
+                        key={step.number}
+                        className="border shadow-md hover:shadow-lg transition-shadow bg-white"
+                        style={{ borderColor: "#0891b2" }}
+                      >
+                        <CardContent className="p-3 text-center">
+                          <div
+                            className="w-8 h-8 mx-auto mb-2 rounded-full flex items-center justify-center text-white font-bold text-xs"
+                            style={{ backgroundColor: "#0891b2" }}
+                          >
+                            {step.number}
+                          </div>
+                          <h4
+                            className="font-semibold text-xs leading-tight"
+                            style={{ color: "#070813" }}
+                          >
+                            {step.title}
+                          </h4>
+                        </CardContent>
+                      </Card>
+                    ))}
                   </div>
 
-                  <div
-                    className="w-16 h-16 mx-auto mb-4 mt-4 rounded-2xl flex items-center justify-center shadow-md border"
+                  <Card
+                    className="border-2 shadow-md"
                     style={{
+                      borderColor: "#ef4444",
                       background:
-                        "linear-gradient(135deg, rgba(95,111,82,0.12) 0%, rgba(166,138,100,0.12) 100%)",
-                      borderColor: "var(--border-gray)",
+                        "linear-gradient(135deg, rgba(239, 68, 68, 0.05) 0%, rgba(8, 145, 178, 0.05) 100%)",
                     }}
                   >
-                    <step.icon className="w-8 h-8" style={{ color: "var(--icon-contrast)" }} />
-                  </div>
-
-                  <h3
-                    className="text-lg font-bold mb-3"
-                    style={{ color: "var(--primary-dark)" }}
-                  >
-                    {step.title}
-                  </h3>
-
-                  <p className="text-gray-600 leading-relaxed">
-                    {step.description}
-                  </p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="mt-16 text-center">
-            <Card className="border-0 shadow-xl bg-white max-w-4xl mx-auto">
-              <CardContent className="p-8">
-                <h3
-                  className="text-2xl font-bold mb-6"
-                  style={{ color: "var(--primary-dark)" }}
-                >
-                  Integration Capabilities
-                </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <div className="space-y-4">
-                    <div className="flex items-center">
-                      <Calendar className="w-5 h-5 text-blue-500 mr-3" />
-                      <span>
-                        <strong>Real-time Availability:</strong> Live calendar
-                        checking
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <CreditCard className="w-5 h-5 text-green-500 mr-3" />
-                      <span>
-                        <strong>Payment Processing:</strong> Stripe integration
-                        for deposits
-                      </span>
-                    </div>
-                  </div>
-                  <div className="space-y-4">
-                    <div className="flex items-center">
-                      <MessageSquare className="w-5 h-5 text-purple-500 mr-3" />
-                      <span>
-                        <strong>Follow-up Automation:</strong> Email sequences
-                        and reminders
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <BarChart3 className="w-5 h-5 text-orange-500 mr-3" />
-                      <span>
-                        <strong>Analytics Dashboard:</strong> Booking metrics
-                        and insights
-                      </span>
-                    </div>
-                  </div>
+                    <CardContent className="p-4">
+                      <h4
+                        className="font-bold mb-3 text-center text-sm"
+                        style={{ color: "#070813" }}
+                      >
+                        Benefits
+                      </h4>
+                      <div className="space-y-2">
+                        {treeData.leadGeneration.benefits.map(
+                          (benefit, idx) => (
+                            <div key={idx} className="flex items-start">
+                              <CheckCircle
+                                className="w-4 h-4 mr-2 mt-0.5 flex-shrink-0"
+                                style={{ color: "#0891b2" }}
+                              />
+                              <span className="text-xs text-gray-700">
+                                {benefit}
+                              </span>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -426,7 +535,7 @@ export default function OurSolutions() {
           <div className="text-center mb-16">
             <h2
               className="text-3xl sm:text-4xl font-bold mb-6"
-              style={{ color: "var(--primary-dark)" }}
+              style={{ color: "#070813" }}
             >
               Seamless Integrations
             </h2>
@@ -439,12 +548,12 @@ export default function OurSolutions() {
             {integrationLogos.map((integration, index) => (
               <div
                 key={index}
-                className="hover-lift smooth-transition bg-white rounded-xl p-6 shadow-lg group"
+                className="hover:shadow-xl transition-shadow bg-white rounded-xl p-6 shadow-lg group"
               >
                 <img
                   src={integration.logo}
                   alt={integration.name}
-                  className="w-full h-12 object-contain filter grayscale group-hover:grayscale-0 smooth-transition"
+                  className="w-full h-12 object-contain filter grayscale group-hover:grayscale-0 transition-all"
                 />
               </div>
             ))}
@@ -455,18 +564,14 @@ export default function OurSolutions() {
               Plus 500+ more integrations available through APIs and webhooks
             </p>
             <Button
-              asChild
               size="lg"
-              className="shadow-lg hover:shadow-xl smooth-transition"
-              style={{ backgroundColor: "var(--primary-dark)" }}
+              className="shadow-lg hover:shadow-xl transition-shadow text-white"
+              style={{
+                background: "linear-gradient(135deg, #00167a 0%, #0891b2 100%)",
+              }}
             >
-              <Link
-                to={createPageUrl("Contact")}
-                className="flex items-center text-white"
-              >
-                Start Your Integration
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              Start Your Integration
+              <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
         </div>
